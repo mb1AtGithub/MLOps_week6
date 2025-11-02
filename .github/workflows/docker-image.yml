@@ -25,8 +25,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Configure Docker for Google Artifact Registry
-        run: |
-          gcloud auth configure-docker ${REGION}-docker.pkg.dev --quiet
+        run: gcloud auth configure-docker ${REGION}-docker.pkg.dev --quiet
       - name: Build and push image
         run: |
           docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}:latest .
