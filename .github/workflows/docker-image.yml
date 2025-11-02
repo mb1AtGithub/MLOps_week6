@@ -43,7 +43,7 @@ jobs:
       - name: Deploy to GKE
         run: |
           # Update Kubernetes deployment with new image
-          kubectl set image deployment/deployment-2 cont_iris=my-app:latest --record
+          kubectl set image deployment/deployment-2 cont_iris-2=my-app:latest --record
 
           kubectl get pods
           kubectl get service
