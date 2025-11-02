@@ -33,5 +33,5 @@ jobs:
         run: gcloud auth configure-docker  ${{ env.REGION }}-docker.pkg.dev
       - name: Build and push image
         run: |
-          docker build -t us-central1-docker.pkg.dev/affable-bivouac-474215-h5/my-repo/my-app:latest .
-          docker push us-central1-docker.pkg.dev/affable-bivouac-474215-h5/my-repo/my-app:latest
+          docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest .
+          docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest
