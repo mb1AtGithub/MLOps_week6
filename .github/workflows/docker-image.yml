@@ -11,7 +11,7 @@ permissions:
 env:
   PROJECT_ID: affable-bivouac-474215-h5
   REGION: us-central1
-  REPOSITORY: my-docker-repo
+  REPOSITORY: my-repo
   IMAGE_NAME: my-app
   INSTANCE_NAME: instance-20251031-232551
   ZONE: us-central1-a
