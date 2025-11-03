@@ -29,8 +29,9 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
+      
       - name: get gke cred
-        run: container clusters get-credentials autopilot-cluster-1 --zone us-east1 --project affable-bivouac-474215-h5
+        run: gcloud container clusters get-credentials autopilot-cluster-1 --zone us-east1 --project affable-bivouac-474215-h5
       - name: Configure Docker for Google Artifact Registry
         run: gcloud auth configure-docker  ${{ env.REGION }}-docker.pkg.dev
       - name: Build and push image
