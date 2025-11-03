@@ -37,9 +37,7 @@ jobs:
           docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest .
           docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest
           
-      - name: Get GKE credentials
-        run: gcloud container clusters get-credentials autopilot-cluster-1 --region us-east1 --project affable-bivouac-474215-h5
-
+     
       - name: validate gk
         run: kubectl get pods
         
