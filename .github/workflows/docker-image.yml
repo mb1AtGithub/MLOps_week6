@@ -40,10 +40,13 @@ jobs:
       - name: Get GKE credentials
         run: gcloud container clusters get-credentials autopilot-cluster-1 --region us-east1 --project affable-bivouac-474215-h5
 
+      - name: validate gk
+        run: kubectl get pods
+        
       - name: Deploy to GKE
         run: |
           # Update Kubernetes deployment with new image
           kubectl set image deployment/deployment-2 cont_iris-2=my-app:latest --record
 
-          kubectl get pods
+          
           kubectl get service
