@@ -54,8 +54,8 @@ jobs:
       # Deploy the Docker image to the GKE cluster
       - name: 'Deploy to GKE'
         run: |-
-          kubectl set image deployment/deployment-1 my-app-sha256-1=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest --record
+          kubectl set image deployment/deployment-2 my-app-sha256-2=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest --record
           
-          kubectl rollout status deployment/deployment-1
+          kubectl rollout status deployment/deployment-2
           kubectl get services -o wide
 
