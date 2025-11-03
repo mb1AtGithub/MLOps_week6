@@ -36,10 +36,6 @@ jobs:
         run: |
           docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest .
           docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest
-          
-     
-      - name: validate gk
-        run: kubectl get pods
         
       - name: Deploy to GKE
         run: |
