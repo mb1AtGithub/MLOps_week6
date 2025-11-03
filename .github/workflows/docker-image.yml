@@ -50,18 +50,12 @@ jobs:
        #   docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest .
         #  docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest
           
-       # Set up kustomize
-      #- name: Install kustomize
-      #  run: |
-      #    curl -L -o kustomize.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/latest/download/kustomize_v5.4.1_linux_amd64.tar.gz
-      #    tar -xzf kustomize.tar.gz
-      #    sudo mv kustomize /usr/local/bin/
-      #    kustomize version
+       
 
       # Deploy the Docker image to the GKE cluster
       - name: 'Deploy to GKE'
         run: |-
-          kubectl set image deployment/deployment-2 cont_iris-2=my-app:latest --record
+          kubectl set image deployment/deployment-1 cont_iris-2=my-app:latest --record
           
           kubectl rollout status deployment/deployment-2
           kubectl get services -o wide
