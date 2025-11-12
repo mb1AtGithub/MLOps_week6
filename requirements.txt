@@ -4,3 +4,7 @@ scikit-learn
 joblib
 numpy
 pandas
+pydantic
+
+# Exporter for Google Cloud
+opentelemetry-exporter-gcp-trace
