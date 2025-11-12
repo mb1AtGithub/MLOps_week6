@@ -5,6 +5,7 @@ from pydantic import BaseModel, ValidationError
 import logging
 import time
 import json
+import joblib
 
 # OpenTelemetry imports
 from opentelemetry import trace
