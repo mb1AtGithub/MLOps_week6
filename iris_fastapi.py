@@ -6,6 +6,7 @@ import logging
 import time
 import json
 import joblib
+import pandas as pd 
 
 # OpenTelemetry imports
 from opentelemetry import trace
@@ -41,10 +42,10 @@ app = FastAPI(title="🌸 Iris Classifier API")
 # e.g. if model load is taking time due to weights being large, 
 #  then is_ready would be False until the model is loaded.
 app_state = {"is_ready": False, "is_alive": True}
+model = None
 
 
-
-# Load model
+#Load model
 #model = joblib.load("model.joblib")
 
 
@@ -59,6 +60,7 @@ class IrisInput(BaseModel):
 
 @app.on_event("startup")
 async def startup_event():
+    global model 
     #import time
     #time.sleep(2)  # simulate work, normally this would be model loading
     # Load model
@@ -110,20 +112,22 @@ async def exception_handler(request: Request, exc: Exception):
     )
 
 @app.post("/predict")
-async def predict(input: IrisInput, request: Request):
+async def predict(inputdict: IrisInput, request: Request):
     with tracer.start_as_current_span("model_inference") as span:
         start_time = time.time()
         trace_id = format(span.get_span_context().trace_id, "032x")
 
         try:
-            input_data = pd.DataFrame([input.dict()])
-            result = model.predict(input_df)[0]
+            idict = inputdict.dict()
+            #idict = {"sepal_length": 5.1,"sepal_width": 3.5, "petal_length": 1.4, "petal_width": 0.2}
+            input_data = pd.DataFrame([idict]) # pd.DataFrame([inputdict.dict()])
+            result = model.predict(input_data)[0]
             latency = round((time.time() - start_time) * 1000, 2)
 
             logger.info(json.dumps({
                 "event": "prediction",
                 "trace_id": trace_id,
-                "input": input_data,
+                "input": idict,
                 "result": result,
                 "latency_ms": latency,
                 "status": "success"
