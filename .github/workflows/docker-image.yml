@@ -58,7 +58,7 @@ jobs:
 
       - name: image to deployment
         run: |
-          kubectl set image deployment/deployment-1 iris-api-sha256-1=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest –record
+          kubectl set image deployment/deployment-1 iris-api-sha256-1=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/iris-api:latest –record
 
           kubectl rollout status deployment/deployment-1
 
