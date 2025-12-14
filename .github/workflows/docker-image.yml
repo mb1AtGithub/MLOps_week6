@@ -56,19 +56,19 @@ jobs:
           #docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest .
           #docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest
 
-      - name: image to deployment
-        run: |
-          kubectl set image deployment/deployment-1 iris-api-sha256-1=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/iris-api:latest –record
+      # - name: image to deployment
+      #   run: |
+      #     kubectl set image deployment/deployment-1 iris-api-sha256-1=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/iris-api:latest –record
 
-          kubectl rollout status deployment/deployment-1
+      #     kubectl rollout status deployment/deployment-1
 
       # Deploy the Docker image to the GKE cluster
-      # - name: 'Deploy to GKE'
-      #   run: |-
-      #     kubectl apply -f k8s/deployment.yaml
-      #     kubectl apply -f k8s/service.yaml
-      #     kubectl apply -f k8s/hpa.yaml
+      - name: 'Deploy to GKE'
+        run: |-
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+          kubectl apply -f k8s/hpa.yaml
 
-      #     kubectl rollout status deployment demo-log-ml-service
-      #     kubectl get services -o wide
+          kubectl rollout status deployment demo-log-ml-service
+          kubectl get services -o wide
 
