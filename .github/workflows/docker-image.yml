@@ -13,7 +13,8 @@ env:
   PROJECT_ID: affable-bivouac-474215-h5
   REGION: us-central1
   REPOSITORY: my-repo
-  IMAGE_NAME: my-app
+  #IMAGE_NAME: my-app
+  IMAGE_NAME: iris-api
   INSTANCE_NAME: instance-20251031-232551
   ZONE: us-central1-A
   ARTIFACTREGISTRY: us-central1-docker.pkg.dev
@@ -49,16 +50,19 @@ jobs:
       
       - name: Build and push image
         run: |
-          docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest .
-          docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest
+          docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/iris-api:latest .
+          docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/iris-api:latest
+          
+          #docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest .
+          #docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-repo/my-app:latest
           
       # Deploy the Docker image to the GKE cluster
-      - name: 'Deploy to GKE'
-        run: |-
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
-          kubectl apply -f k8s/hpa.yaml
+      # - name: 'Deploy to GKE'
+      #   run: |-
+      #     kubectl apply -f k8s/deployment.yaml
+      #     kubectl apply -f k8s/service.yaml
+      #     kubectl apply -f k8s/hpa.yaml
 
-          kubectl rollout status deployment demo-log-ml-service
-          kubectl get services -o wide
+      #     kubectl rollout status deployment demo-log-ml-service
+      #     kubectl get services -o wide
 
