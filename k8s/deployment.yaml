@@ -15,7 +15,8 @@ spec:
       serviceAccountName: telemetry-access  # See below
       containers:
       - name: fastapi-container
-        image: us-central1-docker.pkg.dev/affable-bivouac-474215-h5/my-repo/my-app:latest
+        #image: us-central1-docker.pkg.dev/affable-bivouac-474215-h5/my-repo/my-app:latest
+        image: us-central1-docker.pkg.dev/affable-bivouac-474215-h5/my-repo/iris-api:latest
         ports:
         - containerPort: 8200
         readinessProbe:
